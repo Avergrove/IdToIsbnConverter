@@ -11,11 +11,9 @@ public class IdToIsbnApplication {
 	public static void main(String[] args) {
 		
 		Scanner scanner = new Scanner(System.in);
-		String input = scanner.next();
+		double input = scanner.nextDouble();
 		
-		
-		// TODO Auto-generated method stub
-		System.out.println(input);
+		System.out.println(String.format("%.0f", IdToIsbnConverter.convertToIsbn(input)));
 
 		scanner.close();
 	}
