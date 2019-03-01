@@ -9,7 +9,7 @@ public class IdToIsbnConverter {
 	public static String convertToIsbn(String productId) {
 		String isbnCode = productId;
 		
-		// isbnCode = removeFirstNDigits(isbnCode, 3);
+		isbnCode = removeFirstNDigits(isbnCode, 3);
 		isbnCode = attachIsbnChecksum(isbnCode);
 		
 		return isbnCode;
