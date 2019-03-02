@@ -23,7 +23,7 @@ public class Isbn10Converter implements IsbnConverter{
 	
 	/**
 	 * Removes the first n digits from an id
-	 * @param id The id to remove a digit from.
+	 * @param id The id to remove n digits from.
 	 * @param n The number of digits to remove, must be lower than number of digits in the id.
 	 * @return An id with the first n digits removed.
 	 */

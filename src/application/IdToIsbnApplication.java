@@ -19,7 +19,7 @@ public class IdToIsbnApplication {
 		System.out.println("Please enter a Product Id to convert to ISBN-10 format:");
 		String productId = requestForProductId();
 		
-		String isbnCode = convertToIsbn(productId);
+		String isbnCode = convertToIsbn(productId, new Isbn10Converter());
 		System.out.println(String.format("\nThe generated ISBN-10 id is:\n%s", isbnCode));
 	}
 
@@ -54,8 +54,13 @@ public class IdToIsbnApplication {
 		return input;
 	}
 	
-	private static String convertToIsbn(String productId) {
-		IsbnConverter converter = new Isbn10Converter();
+	/**
+	 * Converts a provided productId into an ISBN code.
+	 * @param productId The id to convert into an ISBN code.
+	 * @param converter Converter variant to use to output ISBN code types.
+	 * @return An ISBN code corresponding to the ISBN Converter used.
+	 */
+	private static String convertToIsbn(String productId, IsbnConverter converter) {
 		String isbnCode = converter.convertToIsbn(productId);
 		return isbnCode;
 	}
