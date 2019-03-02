@@ -1,12 +1,18 @@
-package idToIsbnConverter;
+package isbnConverter;
 
-public class IdToIsbnConverter {
+/**
+ * An implementation of the IsbnConverter which accepts 12 digit product Ids, converting them into ISBN-10 codes.
+ * @author Averg
+ *
+ */
+public class Isbn10Converter implements IsbnConverter{
+	
 	/**
 	 * Converts a product id into an ISBN code
-	 * @param productId A non-negative number
-	 * @return The ISBN code corresponding to the product id
+	 * @param productId A 12-digit string representing a product id.
+	 * @return The ISBN code corresponding to the provided product id
 	 */
-	public static String convertToIsbn(String productId) {
+	public String convertToIsbn(String productId) {
 		String isbnCode = productId;
 		
 		isbnCode = removeFirstNDigits(isbnCode, 3);
@@ -17,11 +23,15 @@ public class IdToIsbnConverter {
 	
 	/**
 	 * Removes the first n digits from an id
-	 * @param id The non-zero and non-negative id to remove
-	 * @param n The number of digits to remove, must be lower than number of digits in id.
+	 * @param id The id to remove a digit from.
+	 * @param n The number of digits to remove, must be lower than number of digits in the id.
 	 * @return An id with the first n digits removed.
 	 */
 	private static String removeFirstNDigits(String id, int n) {
+		
+		if(n > id.length()){
+			throw new RuntimeException("n must be less than the number of characters in id!");
+		}
 		
 		return id.substring(n, id.length());
 		
@@ -29,8 +39,8 @@ public class IdToIsbnConverter {
 	
 	/**
 	 * Appends a checksum to the provided id
-	 * @param id The non-zero and non-negative id to append a checksum to
-	 * @return An id that is appended with the checksum
+	 * @param id A numeric id to append a checksum to
+	 * @return The product id appended with a checksum
 	 */
 	private static String attachIsbnChecksum(String id) {
 		String isbn = id.concat(getIsbnChecksum(id));
@@ -58,11 +68,15 @@ public class IdToIsbnConverter {
 			currRadix++;
 		}
 		
+		
 		checksum = 11 - checksum % 11;
 		
-		
 		if(checksum == 10) {
-			return "X";
+			return "x";
+		}
+		
+		else if(checksum == 11) {
+			return "0";
 		}
 		
 		else {
